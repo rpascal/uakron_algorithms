@@ -5,27 +5,28 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
 
 // 'BigIntegerLibrary.hh' includes all of the library headers.
 #include "BigIntegerLibrary.hh"
 
 bool isRelativelyPrime(BigUnsigned x, BigUnsigned y);
 BigUnsigned getRandomNumber(BigUnsigned k);
-BigUnsigned modExp(BigUnsigned x, BigUnsigned y, BigUnsigned m);
 bool fermatTest(BigUnsigned N);
 BigUnsigned getLargeRandomPrime();
 BigUnsigned getE(BigUnsigned theta);
 
 int main()
 {
+   srand(time(NULL));
+
    /* The library throws 'const char *' error messages when things go
 	 * wrong.  It's a good idea to catch them using a 'try' block like this
 	 * one.  Your C++ compiler might need a command-line option to compile
 	 * code that uses exceptions. */
    try
    {
-
-      std::cout << "a couple of test cases for 3460:435/535 Algorithms!!!\n";
       BigUnsigned p = getLargeRandomPrime();
       std::cout << p << std::endl;
       BigUnsigned q = getLargeRandomPrime();
@@ -69,7 +70,6 @@ int main()
    return 0;
 }
 
-
 bool isRelativelyPrime(BigUnsigned x, BigUnsigned y)
 {
    return gcd(x, y) == 1;
@@ -85,31 +85,11 @@ BigUnsigned getRandomNumber(BigUnsigned k)
    return x;
 }
 
-BigUnsigned modExp(BigUnsigned x, BigUnsigned y, BigUnsigned m)
-{
-   if (y == 0)
-   {
-      return BigUnsigned(1);
-   }
-   else
-   {
-      BigUnsigned z = modExp(x, y / 2, m);
-      if (y % 2 == 0)
-      {
-         return (z * z % m);
-      }
-      else
-      {
-         return (x * z * z % m);
-      }
-   }
-}
-
 bool fermatTest(BigUnsigned N)
 {
    BigUnsigned a1(1);
    BigUnsigned a2(2);
-   return (modExp(a1, N - 1, N) == 1) && (modExp(a2, N - 1, N) == 1);
+   return (modexp(a1, N - 1, N) == 1) && (modexp(a2, N - 1, N) == 1);
 }
 
 BigUnsigned getLargeRandomPrime()
@@ -125,10 +105,10 @@ BigUnsigned getLargeRandomPrime()
 BigUnsigned getE(BigUnsigned theta)
 {
 
-   BigUnsigned e = getRandomNumber(20);
+   BigUnsigned e = getRandomNumber(100);
    while (!isRelativelyPrime(e, theta))
    {
-      e = getRandomNumber(20);
+      e = getRandomNumber(100);
    }
    return e;
 }
