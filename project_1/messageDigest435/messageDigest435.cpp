@@ -1,5 +1,7 @@
 /***
    prepared for CS435 Project 1 part 2
+   Ryan Pascal
+   2932732
 **/
 
 #include <string.h>
@@ -103,11 +105,11 @@ int main(int argc, char *argv[])
 
          if (encrypt == messageAsNumber)
          {
-            std::cout << "Verification succeeded," << filename << " unchanged.\n";
+            std::cout << "Verification succeeded: " << filename << " authentic.\n";
          }
          else
          {
-            std::cout << "Verification failed," << filename << " modified.\n";
+            std::cout << "Verification failed: " << filename << " modified.\n";
          }
       }
    }

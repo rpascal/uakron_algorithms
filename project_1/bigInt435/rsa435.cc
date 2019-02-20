@@ -1,4 +1,8 @@
-// You need to complete this program for a part of your first project.
+/***
+   prepared for CS435 Project 1 part 1
+   Ryan Pascal
+   2932732
+**/
 
 // Standard libraries
 #include <string>
@@ -28,30 +32,29 @@ int main()
    try
    {
       BigUnsigned p = getLargeRandomPrime();
-      std::cout << p << std::endl;
       BigUnsigned q = getLargeRandomPrime();
-      std::cout << q << std::endl;
 
       BigUnsigned n = p * q;
 
       BigUnsigned phi = (p - 1) * (q - 1);
 
       BigUnsigned e = getE(phi);
-      std::cout << e << std::endl;
 
       BigUnsigned d = modinv(e, phi);
-      std::cout << d << std::endl;
 
+      // Adding p and q to file
       std::ofstream p_q("p_q.txt");
       p_q << p << std::endl;
       p_q << q << std::endl;
       p_q.close();
 
+      // Adding e and n to file
       std::ofstream e_n("e_n.txt");
       e_n << e << std::endl;
       e_n << n << std::endl;
       e_n.close();
 
+      // Adding d and n to file
       std::ofstream d_n("d_n.txt");
       d_n << d << std::endl;
       d_n << n << std::endl;
