@@ -8,25 +8,45 @@
 #include "sha256.h"
 #include "BigIntegerLibrary.hh"
 
-void getTwoLinesFromFile(std::string file, BigUnsigned &d, BigUnsigned &n)
+/*
+   This function will read a file that has two lines
+   First line will be put into a variable
+   Second line b
+*/
+void getTwoLinesFromFile(std::string file, BigUnsigned &a, BigUnsigned &b)
 {
    std::ifstream a_b(file);
    if (a_b.good())
    {
-      std::string D;
-      std::string N;
-      std::getline(a_b, D);
+      std::string A;
+      std::string B;
+      std::getline(a_b, A);
 
-      std::getline(a_b, N);
-      d = stringToBigUnsigned(D);
-      n = stringToBigUnsigned(N);
+      std::getline(a_b, B);
+      a = stringToBigUnsigned(A);
+      b = stringToBigUnsigned(B);
    }
 }
 
-void print(std::string title, BigUnsigned data)
+BigUnsigned getMessageData(std::string filename)
 {
-   std::cout << title << ": " << data << std::endl
-             << std::endl;
+   //read the file
+   std::streampos begin,
+       end;
+   std::ifstream myfile(filename.c_str(), std::ios::binary);
+   begin = myfile.tellg();
+   myfile.seekg(0, std::ios::end);
+   end = myfile.tellg();
+   std::streampos size = end - begin;
+
+   myfile.seekg(0, std::ios::beg);
+   char *memblock = new char[size];
+   myfile.read(memblock, size); //read file; it's saved in the char array memblock
+   myfile.close();
+
+   std::string memblock_sha = sha256(memblock);
+   delete[] memblock;
+   return BigUnsigned(BigUnsignedInABase(memblock_sha, 16));
 }
 
 int main(int argc, char *argv[])
@@ -37,44 +57,20 @@ int main(int argc, char *argv[])
    else
    {
       std::string filename = argv[2];
+      std::string filenameSignature = filename + ".signature";
 
-      //read the file
-      std::streampos begin, end;
-      std::ifstream myfile(filename.c_str(), std::ios::binary);
-      begin = myfile.tellg();
-      myfile.seekg(0, std::ios::end);
-      end = myfile.tellg();
-      std::streampos size = end - begin;
-      //std::cout << "size of the file: " << size << " bytes.\n"; //size of the file
-
-      myfile.seekg(0, std::ios::beg);
-      char *memblock = new char[size];
-      myfile.read(memblock, size); //read file; it's saved in the char array memblock
-      myfile.close();
-
-      // std::string copyOFfile = filename + ".Copy";
-      // std::ofstream myfile2(copyOFfile.c_str(), std::ios::binary);
-      // myfile2.write(memblock, size); //write to a file
-      // myfile2.close();
-
-      std::cout << "memblock: " << memblock << std::endl;
-      std::string memblock_sha = sha256(memblock);
-      std::cout << "memblock_sha: " << memblock_sha << std::endl;
-
-      BigUnsigned mesAsUnsigned = BigUnsigned(BigUnsignedInABase(memblock_sha, 16));
-      print("mesAsUnsigned", mesAsUnsigned);
+      BigUnsigned messageAsNumber = getMessageData(filename);
 
       if (argv[1][0] == 's')
       {
-
          BigUnsigned d;
          BigUnsigned n;
          getTwoLinesFromFile("d_n.txt", d, n);
 
-         BigUnsigned sig = modexp(mesAsUnsigned, d, n);
-         print("sig", sig);
+         BigUnsigned sig = modexp(messageAsNumber, d, n);
 
-         std::ofstream sigOFfile(filename + ".signature");
+         // Write to signature file
+         std::ofstream sigOFfile(filenameSignature);
          sigOFfile << bigUnsignedToString(sig) << std::endl;
          sigOFfile.close();
       }
@@ -83,25 +79,37 @@ int main(int argc, char *argv[])
          BigUnsigned e;
          BigUnsigned n;
          getTwoLinesFromFile("e_n.txt", e, n);
+
          BigUnsigned sig;
 
-         std::ifstream sigFile(filename + ".signature");
-         if (sigFile.good())
+         // Just to be safe it signed first
+         try
          {
-            std::string sigStr;
-            std::getline(sigFile, sigStr);
-            sig = stringToBigUnsigned(sigStr);
+            std::ifstream sigFile(filenameSignature);
+            if (sigFile.good())
+            {
+               std::string sigStr;
+               std::getline(sigFile, sigStr);
+               sig = stringToBigUnsigned(sigStr);
+            }
+         }
+         catch (const std::exception &e)
+         {
+            std::cout << "Could not open signature file... Exitting...\n";
+            return 0;
          }
 
-         print("sig", sig);
+         BigUnsigned encrypt = modexp(sig, e, n);
 
-         BigUnsigned res = modexp(sig, e, n);
-
-         print("res", res);
-
-         std::cout << "Finally: " << (res == mesAsUnsigned) << std::endl;
+         if (encrypt == messageAsNumber)
+         {
+            std::cout << "Verification succeeded," << filename << " unchanged.\n";
+         }
+         else
+         {
+            std::cout << "Verification failed," << filename << " modified.\n";
+         }
       }
-      delete[] memblock;
    }
    return 0;
 }

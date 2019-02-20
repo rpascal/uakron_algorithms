@@ -15,7 +15,7 @@ bool isRelativelyPrime(BigUnsigned x, BigUnsigned y);
 BigUnsigned getRandomNumber(BigUnsigned k);
 bool fermatTest(BigUnsigned N);
 BigUnsigned getLargeRandomPrime();
-BigUnsigned getE(BigUnsigned theta);
+BigUnsigned getE(BigUnsigned phi);
 
 int main()
 {
@@ -34,16 +34,12 @@ int main()
 
       BigUnsigned n = p * q;
 
-      BigUnsigned theta = (p - 1) * (q - 1);
-      if (theta % 2 == 0)
-      {
-         theta++;
-      }
+      BigUnsigned phi = (p - 1) * (q - 1);
 
-      BigUnsigned e = getE(theta);
+      BigUnsigned e = getE(phi);
       std::cout << e << std::endl;
 
-      BigUnsigned d = modinv(e, theta);
+      BigUnsigned d = modinv(e, phi);
       std::cout << d << std::endl;
 
       std::ofstream p_q("p_q.txt");
@@ -99,16 +95,24 @@ BigUnsigned getLargeRandomPrime()
    {
       x = getRandomNumber(155);
    }
+   if (x % 2 == 0)
+   {
+      x++;
+   }
    return x;
 }
 
-BigUnsigned getE(BigUnsigned theta)
+BigUnsigned getE(BigUnsigned phi)
 {
 
-   BigUnsigned e = getRandomNumber(100);
-   while (!isRelativelyPrime(e, theta))
+   BigUnsigned e = getRandomNumber(25);
+   while (!isRelativelyPrime(e, phi))
    {
-      e = getRandomNumber(100);
+      e = getRandomNumber(25);
+   }
+   if (e % 2 == 0)
+   {
+      e++;
    }
    return e;
 }
