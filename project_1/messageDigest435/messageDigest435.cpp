@@ -10,14 +10,14 @@
 
 void getTwoLinesFromFile(std::string file, BigUnsigned &d, BigUnsigned &n)
 {
-   std::ifstream d_n(file);
-   if (d_n.good())
+   std::ifstream a_b(file);
+   if (a_b.good())
    {
       std::string D;
       std::string N;
-      std::getline(d_n, D);
+      std::getline(a_b, D);
 
-      std::getline(d_n, N);
+      std::getline(a_b, N);
       d = stringToBigUnsigned(D);
       n = stringToBigUnsigned(N);
    }
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
       std::string memblock_sha = sha256(memblock);
       std::cout << "memblock_sha: " << memblock_sha << std::endl;
 
-      BigUnsigned mesAsUnsigned = BigUnsigned(BigUnsignedInABase(memblock_sha, 32));
+      BigUnsigned mesAsUnsigned = BigUnsigned(BigUnsignedInABase(memblock_sha, 16));
       print("mesAsUnsigned", mesAsUnsigned);
 
       if (argv[1][0] == 's')
