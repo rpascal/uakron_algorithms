@@ -1,11 +1,13 @@
 // A C++ program to find convex hull of a set of points. Refer
-// https://www.geeksforgeeks.org/orientation-3-ordered-points/
-// for explanation of orientation()
+// https://www.geeksforgeeks.org/orientationGraham-3-ordered-points/
+// for explanation of orientationGraham()
 #include <iostream>
 #include <stack>
 #include <stdlib.h>
 #include "Point.hh"
 #include <vector>
+
+#include "graham-scan.hh"
 
 // A globle point needed for  sorting points with reference
 // to  the first point Used in compare function of qsort()
@@ -37,12 +39,12 @@ int distSq(Point p1, Point p2)
            (p1.y - p2.y) * (p1.y - p2.y);
 }
 
-// To find orientation of ordered triplet (p, q, r).
+// To find orientationGraham of ordered triplet (p, q, r).
 // The function returns following values
 // 0 --> p, q and r are colinear
 // 1 --> Clockwise
 // 2 --> Counterclockwise
-int orientation(Point p, Point q, Point r)
+int orientationGraham(Point p, Point q, Point r)
 {
     int val = (q.y - p.y) * (r.x - q.x) -
               (q.x - p.x) * (r.y - q.y);
@@ -59,8 +61,8 @@ int compare(const void *vp1, const void *vp2)
     Point *p1 = (Point *)vp1;
     Point *p2 = (Point *)vp2;
 
-    // Find orientation
-    int o = orientation(p0, *p1, *p2);
+    // Find orientationGraham
+    int o = orientationGraham(p0, *p1, *p2);
     if (o == 0)
         return (distSq(p0, *p2) >= distSq(p0, *p1)) ? -1 : 1;
 
@@ -103,8 +105,8 @@ std::vector<Point> grahamScanConvexHull(std::vector<Point> points, int n)
     {
         // Keep removing i while angle of i and i+1 is same
         // with respect to p0
-        while (i < n - 1 && orientation(p0, points[i],
-                                        points[i + 1]) == 0)
+        while (i < n - 1 && orientationGraham(p0, points[i],
+                                              points[i + 1]) == 0)
             i++;
 
         points[m] = points[i];
@@ -131,7 +133,7 @@ std::vector<Point> grahamScanConvexHull(std::vector<Point> points, int n)
         // Keep removing top while the angle formed by
         // points next-to-top, top, and points[i] makes
         // a non-left turn
-        while (orientation(nextToTop(S), S.top(), points[i]) != 2)
+        while (orientationGraham(nextToTop(S), S.top(), points[i]) != 2)
             S.pop();
         S.push(points[i]);
     }

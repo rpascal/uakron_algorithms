@@ -85,8 +85,6 @@ int main(int argc, char *argv[])
             //call your Graham Scan algorithm to solve the problem
             sortedResult = GrahamScan(data, n);
 
-            std::cout << "Original Size: " << data.size() << " Sorted size:" << sortedResult.size() << std::endl;
-
             outputFile = "hull_G.txt";
         }
         else if (algType[0] == 'J')
@@ -101,6 +99,14 @@ int main(int argc, char *argv[])
             sortedResult = Quickhull(data, n);
             outputFile = "hull_Q.txt";
         }
+        std::cout << std::endl;
+
+        for (Point i : sortedResult)
+        {
+            std::cout << "(" << i.x << "," << i.y << ")" << std::endl;
+        }
+        std::cout << std::endl;
+        std::cout << "Original Size: " << data.size() << " Sorted size:" << sortedResult.size() << std::endl;
 
         std::cout << outputFile << std::endl;
 
@@ -119,13 +125,12 @@ vector<Point> GrahamScan(vector<Point> data, int n)
 
 vector<Point> JarvisMarch(vector<Point> data, int n)
 {
-    vector<Point> sortedResult;
+    vector<Point> sortedResult = jarvisMatchConvexHull(data, n);
     return sortedResult;
 }
 
 vector<Point> Quickhull(vector<Point> data, int n)
 {
-    vector<Point> sortedResult;
-
+    vector<Point> sortedResult = quickHullConvexHull(data, n);
     return sortedResult;
 }
