@@ -53,10 +53,6 @@ vector<Point> getInputData(string fileName)
     return data;
 }
 
-vector<Point> GrahamScan(vector<Point> data, int n);
-vector<Point> JarvisMarch(vector<Point> data, int n);
-vector<Point> Quickhull(vector<Point> data, int n);
-
 int main(int argc, char *argv[])
 {
     //Second project starts here
@@ -83,20 +79,20 @@ int main(int argc, char *argv[])
         if (algType[0] == 'G')
         {
             //call your Graham Scan algorithm to solve the problem
-            sortedResult = GrahamScan(data, n);
+            sortedResult = grahamScanConvexHull(data, n);
 
             outputFile = "hull_G.txt";
         }
         else if (algType[0] == 'J')
         {
             //call your Javis March algorithm to solve the problem
-            sortedResult = JarvisMarch(data, n);
+            sortedResult = jarvisMatchConvexHull(data, n);
             outputFile = "hull_J.txt";
         }
         else
         { //default
             //call your Quickhull algorithm to solve the problem
-            sortedResult = Quickhull(data, n);
+            sortedResult = quickHullConvexHull(data, n);
             outputFile = "hull_Q.txt";
         }
         std::cout << std::endl;
@@ -115,22 +111,4 @@ int main(int argc, char *argv[])
 
         return 0;
     }
-}
-
-vector<Point> GrahamScan(vector<Point> data, int n)
-{
-    vector<Point> sortedResult = grahamScanConvexHull(data, n);
-    return sortedResult;
-}
-
-vector<Point> JarvisMarch(vector<Point> data, int n)
-{
-    vector<Point> sortedResult = jarvisMatchConvexHull(data, n);
-    return sortedResult;
-}
-
-vector<Point> Quickhull(vector<Point> data, int n)
-{
-    vector<Point> sortedResult = quickHullConvexHull(data, n);
-    return sortedResult;
 }

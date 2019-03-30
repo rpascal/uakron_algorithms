@@ -1,26 +1,12 @@
-// C++ program to implement Quick Hull algorithm
-// to find convex hull.
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// // iPair is integer pairs
-// #define iPair pair<int, int>
-
-// // Stores the result (points of convex hull)
-// set<iPair> hull;
-
-
 #include "Point.hh"
 #include <vector>
 #include <stdlib.h>
+#include <algorithm> // std::find
 #include "quick-hull.hh"
 
 using std::vector;
 
-
 vector<Point> hull;
-
-
 
 // Returns the side of point p with respect to line
 // joining points p1 and p2.
@@ -68,14 +54,33 @@ void quickHull(vector<Point> a, int n, Point p1, Point p2, int side)
     // of L to the convex hull.
     if (ind == -1)
     {
-        hull.push_back(p1);
-        hull.push_back(p2);
+        if (!existsInHull(p1, hull))
+        {
+            hull.push_back(p1);
+        }
+        if (!existsInHull(p2, hull))
+        {
+            hull.push_back(p2);
+        }
         return;
     }
 
     // Recur for the two parts divided by a[ind]
     quickHull(a, n, a[ind], p1, -findSide(a[ind], p1, p2));
     quickHull(a, n, a[ind], p2, -findSide(a[ind], p2, p1));
+}
+
+bool existsInHull(Point p1, vector<Point> v)
+{
+    for (std::size_t i = 0; i < v.size(); ++i)
+    {
+        Point pv = v[i];
+        if (pv.x == p1.x && pv.y == p1.y)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 vector<Point> quickHullConvexHull(vector<Point> a, int n)
