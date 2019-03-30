@@ -264,14 +264,41 @@ public class ConvexHull_GUI extends JPanel
       ConvexHull_GUI CH = new ConvexHull_GUI();
       boolean generateData = false;
       if (generateData){
-         CH.testFileGen("test.txt", "triangle", 1000); //generate data points
+
+         java.util.List<Integer> p = new ArrayList<>();
+         p.add(10);
+         p.add(1000);
+         p.add(10000);
+         p.add(100000);
+         p.add(1000000);
+
+         java.util.List<String> types = new ArrayList<>();
+         types.add("circle");
+         types.add("onCircle");
+         types.add("rectangle");
+         types.add("triangle");
+
+         types.forEach(type ->{
+            p.forEach(point ->{
+               CH.testFileGen(type + "_" + point.toString() + ".txt", type, point); //generate data points
+            });
+         });
+
          System.out.println("done");
          System.exit(0);
       }
       else {
          //visulizing the points and convex hull      
-         String dataFile = "test.txt";
-         String hullFile = "hull.txt";
+//         String dataFile = "test.txt";
+//         String hullFile = "hull.txt";
+
+         String algType = "J";
+         String type = "triangle";
+         String points = "100000";
+
+         String dataFile = "data/"+type+"_" +points+".txt";
+         String hullFile = "data/sorted/_sorted_"+algType + "_"+type+"_" +points+".txt";
+
       
          CH.readDataFile(dataFile, 'd');
          System.out.println(dataFile + " has "+CH.getData().size()+" points.");

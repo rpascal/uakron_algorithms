@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <ctime>
+
 #include "Point.hh"
 #include "graham-scan.hh"
 #include "jarvis-march.hh"
@@ -20,6 +22,18 @@ using std::getline;
 using std::ifstream;
 using std::string;
 using std::vector;
+
+struct HullSortResult
+{
+    double runtime;
+    vector<Point> sortedData;
+    string outputFileName;
+};
+
+double runtime(clock_t start, clock_t stop);
+void testRuntimes();
+HullSortResult runHullSort(string algType, vector<Point> data);
+void writeSorted(string name, vector<Point> data);
 
 void readData(string fileName, function<void(string &)> lineCallback)
 {
@@ -46,7 +60,7 @@ vector<Point> getInputData(string fileName)
         temp.x = std::stoi(s);
         iss >> s;
         temp.y = std::stoi(s);
-        std::cout << temp.x << "  " << temp.y << std::endl;
+        // std::cout << temp.x << "  " << temp.y << std::endl;
         data.push_back(temp);
     });
 
@@ -55,60 +69,140 @@ vector<Point> getInputData(string fileName)
 
 int main(int argc, char *argv[])
 {
+    // std::cout << argc << argv[1];
+    std::string str1("testRuntimes");
+
     //Second project starts here
-    if (argc < 3)
+    if (argc == 2 && str1.compare(argv[1]) == 0)
+    {
+        testRuntimes();
+        return 0;
+    }
+    else if (argc < 3)
         std::cout << "wrong format! should be \"a.exe algType dataFile\"";
     else
     {
         std::string algType = argv[1];
         std::string dataFilename = argv[2];
-        std::string outputFile = "";
-        //read your data points from dataFile (see class example for the format)
 
         vector<Point> data = getInputData(dataFilename);
 
-        vector<Point> sortedResult;
         if (data.size() == 0)
         {
             std::cout << "No data could be loaded from input file or input file is empty";
             return 0;
         }
+        HullSortResult res = runHullSort(algType, data);
 
-        int n = data.size();
+        std::cout << "Runtime: " << res.runtime << std::endl;
 
-        if (algType[0] == 'G')
-        {
-            //call your Graham Scan algorithm to solve the problem
-            sortedResult = grahamScanConvexHull(data, n);
+        writeSorted(res.outputFileName, res.sortedData);
 
-            outputFile = "hull_G.txt";
-        }
-        else if (algType[0] == 'J')
-        {
-            //call your Javis March algorithm to solve the problem
-            sortedResult = jarvisMatchConvexHull(data, n);
-            outputFile = "hull_J.txt";
-        }
-        else
-        { //default
-            //call your Quickhull algorithm to solve the problem
-            sortedResult = quickHullConvexHull(data, n);
-            outputFile = "hull_Q.txt";
-        }
-        std::cout << std::endl;
-
-        for (Point i : sortedResult)
-        {
-            std::cout << "(" << i.x << "," << i.y << ")" << std::endl;
-        }
-        std::cout << std::endl;
-        std::cout << "Original Size: " << data.size() << " Sorted size:" << sortedResult.size() << std::endl;
-
-        std::cout << outputFile << std::endl;
-
-        //write your convex hull to the outputFile (see class example for the format)
-        //you should be able to visulize your convex hull using the "ConvexHull_GUI" program.
+        // std::cout << res.outputFileName << std::endl;
 
         return 0;
     }
+}
+
+/*
+    Calculate runtime
+*/
+double runtime(clock_t start, clock_t stop)
+{
+    return double(stop - start) / double(CLOCKS_PER_SEC);
+}
+
+HullSortResult runHullSort(string algType, vector<Point> data)
+{
+    clock_t start, stop;
+
+    vector<Point> sortedResult;
+    std::string outputFile = "";
+
+    int n = data.size();
+    start = clock();
+
+    if (algType[0] == 'G')
+    {
+        //call your Graham Scan algorithm to solve the problem
+        sortedResult = grahamScanConvexHull(data, n);
+        outputFile = "hull_G.txt";
+    }
+    else if (algType[0] == 'J')
+    {
+        //call your Javis March algorithm to solve the problem
+        sortedResult = jarvisMatchConvexHull(data, n);
+        outputFile = "hull_J.txt";
+    }
+    else
+    {
+        //call your Quickhull algorithm to solve the problem
+        sortedResult = quickHullConvexHull(data, n);
+        outputFile = "hull_Q.txt";
+    }
+
+    stop = clock();
+    double rt = runtime(start, stop);
+
+    HullSortResult res;
+    res.outputFileName = outputFile;
+    res.runtime = rt;
+    res.sortedData = sortedResult;
+    return res;
+}
+
+void testRuntimes()
+{
+    string algTypes[3] = {"G", "J", "Q"};
+    string types[4] = {"circle", "onCircle", "rectangle", "triangle"};
+    string points[5] = {"10", "1000", "10000", "100000", "1000000"};
+
+    int i, j, k;
+
+    std::ofstream outFile;
+    outFile.open("runtimeResults.txt");
+
+    for (k = 0; k < 3; ++k)
+    {
+        string algType = algTypes[k];
+        outFile << "Algo Type: " << algType << "\n";
+        for (i = 0; i < 4; ++i)
+        {
+            string type = types[i];
+            outFile << "    Type: " << type << "\n";
+
+            for (j = 0; j < 5; ++j)
+            {
+                string point = points[j];
+                string dataFilename = "./GUI4ConvexHall/data/" + type + "_" + point + ".txt";
+                vector<Point> data = getInputData(dataFilename);
+                HullSortResult res = runHullSort(algType, data);
+                outFile << "        Points: " << point << " runtime: " << res.runtime << "\n";
+                writeSorted("./GUI4ConvexHall/data/sorted/_sorted_" + algType + "_" + type + "_" + point + ".txt", res.sortedData);
+            }
+        }
+    }
+
+    outFile.close();
+}
+
+void writeSorted(string name, vector<Point> data)
+{
+
+    std::ofstream outFile;
+    outFile.open(name);
+
+    std::size_t i;
+    std::size_t size = data.size();
+    for (i = 0; i < size; ++i)
+    {
+        Point point = data[i];
+        outFile << point.x << " " << point.y;
+        if (i != size - 1)
+        {
+            outFile << "\n";
+        }
+    }
+
+    outFile.close();
 }
