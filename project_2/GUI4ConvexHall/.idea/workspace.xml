@@ -2,10 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59f65748-a8cb-41a2-b975-c4ba4f9ed504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConvexHull_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ConvexHull_GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_100000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_100000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_100000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_100000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000000.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../convexHull435" beforeDir="false" afterPath="$PROJECT_DIR$/../convexHull435" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../convexHull435.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../convexHull435.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../quick-hull.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../quick-hull.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../quick-hull.hh" beforeDir="false" afterPath="$PROJECT_DIR$/../quick-hull.hh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../runtimeResults.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../runtimeResults.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ConvexHull_GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="295" column="32" selection-start-line="295" selection-start-column="32" selection-end-line="295" selection-end-column="32" />
+            <state relative-caret-position="340">
+              <caret line="294" column="28" selection-start-line="294" selection-start-column="28" selection-end-line="294" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -59,6 +80,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -81,8 +104,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -133,13 +154,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3344000" />
+    <option name="totallyTimeSpent" value="3361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="45" y="25" width="1875" height="1175" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25533077" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26079825" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -174,37 +195,28 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/circle_1000.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/circle_10000.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-149383" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/circle_100000.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1499029" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/triangle_10.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/circle_10.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/circle_1000.txt" />
+    <entry file="file://$PROJECT_DIR$/circle_10000.txt" />
+    <entry file="file://$PROJECT_DIR$/circle_100000.txt" />
+    <entry file="file://$PROJECT_DIR$/triangle_10.txt" />
+    <entry file="file://$PROJECT_DIR$/circle_10.txt" />
     <entry file="file://$PROJECT_DIR$/test.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/hull.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ConvexHull_GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="295" column="32" selection-start-line="295" selection-start-column="32" selection-end-line="295" selection-end-column="32" />
+        <state relative-caret-position="340">
+          <caret line="294" column="28" selection-start-line="294" selection-start-column="28" selection-end-line="294" selection-end-column="28" />
         </state>
       </provider>
     </entry>

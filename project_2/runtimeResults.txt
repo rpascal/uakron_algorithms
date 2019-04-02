@@ -1,75 +1,75 @@
 Algo Type: G
     Type: circle
-        Points: 10 runtime: 6e-06
-        Points: 1000 runtime: 0.000317
-        Points: 10000 runtime: 0.002005
-        Points: 100000 runtime: 0.01552
-        Points: 1000000 runtime: 0.172225
+        Points: 10 runtime: 8e-06
+        Points: 1000 runtime: 0.000248
+        Points: 10000 runtime: 0.001313
+        Points: 100000 runtime: 0.015027
+        Points: 1000000 runtime: 0.16112
     Type: onCircle
-        Points: 10 runtime: 3e-06
-        Points: 1000 runtime: 9.9e-05
-        Points: 10000 runtime: 0.001117
-        Points: 100000 runtime: 0.012393
-        Points: 1000000 runtime: 0.141578
-    Type: rectangle
-        Points: 10 runtime: 3e-06
-        Points: 1000 runtime: 0.000103
-        Points: 10000 runtime: 0.001269
-        Points: 100000 runtime: 0.015694
-        Points: 1000000 runtime: 0.177722
-    Type: triangle
         Points: 10 runtime: 4e-06
-        Points: 1000 runtime: 0.000103
-        Points: 10000 runtime: 0.001319
-        Points: 100000 runtime: 0.015715
-        Points: 1000000 runtime: 0.170178
+        Points: 1000 runtime: 9.9e-05
+        Points: 10000 runtime: 0.001418
+        Points: 100000 runtime: 0.011779
+        Points: 1000000 runtime: 0.127781
+    Type: rectangle
+        Points: 10 runtime: 4e-06
+        Points: 1000 runtime: 0.000102
+        Points: 10000 runtime: 0.001309
+        Points: 100000 runtime: 0.014655
+        Points: 1000000 runtime: 0.162022
+    Type: triangle
+        Points: 10 runtime: 3e-06
+        Points: 1000 runtime: 0.000102
+        Points: 10000 runtime: 0.001276
+        Points: 100000 runtime: 0.014672
+        Points: 1000000 runtime: 0.15877
 Algo Type: J
     Type: circle
         Points: 10 runtime: 1e-06
-        Points: 1000 runtime: 0.000124
-        Points: 10000 runtime: 0.001668
-        Points: 100000 runtime: 0.028987
-        Points: 1000000 runtime: 0.389757
+        Points: 1000 runtime: 0.000113
+        Points: 10000 runtime: 0.001748
+        Points: 100000 runtime: 0.028151
+        Points: 1000000 runtime: 0.369087
     Type: onCircle
         Points: 10 runtime: 2e-06
-        Points: 1000 runtime: 0.000795
-        Points: 10000 runtime: 0.009877
-        Points: 100000 runtime: 0.095979
-        Points: 1000000 runtime: 0.979715
+        Points: 1000 runtime: 0.00078
+        Points: 10000 runtime: 0.009315
+        Points: 100000 runtime: 0.089911
+        Points: 1000000 runtime: 0.937349
     Type: rectangle
         Points: 10 runtime: 2e-06
-        Points: 1000 runtime: 8.1e-05
-        Points: 10000 runtime: 0.001194
-        Points: 100000 runtime: 0.012448
-        Points: 1000000 runtime: 0.11852
+        Points: 1000 runtime: 8.2e-05
+        Points: 10000 runtime: 0.001222
+        Points: 100000 runtime: 0.012202
+        Points: 1000000 runtime: 0.116798
     Type: triangle
-        Points: 10 runtime: 2e-06
-        Points: 1000 runtime: 7.2e-05
-        Points: 10000 runtime: 0.000495
-        Points: 100000 runtime: 0.003662
-        Points: 1000000 runtime: 0.027566
+        Points: 10 runtime: 1e-06
+        Points: 1000 runtime: 7.1e-05
+        Points: 10000 runtime: 0.000488
+        Points: 100000 runtime: 0.003759
+        Points: 1000000 runtime: 0.028329
 Algo Type: Q
     Type: circle
-        Points: 10 runtime: 4e-06
-        Points: 1000 runtime: 0.000161
-        Points: 10000 runtime: 0.002641
-        Points: 100000 runtime: 0.04207
-        Points: 1000000 runtime: 0.806363
+        Points: 10 runtime: 5e-06
+        Points: 1000 runtime: 9.1e-05
+        Points: 10000 runtime: 0.000923
+        Points: 100000 runtime: 0.00946
+        Points: 1000000 runtime: 0.102014
     Type: onCircle
-        Points: 10 runtime: 1.9e-05
-        Points: 1000 runtime: 0.000966
-        Points: 10000 runtime: 0.009647
-        Points: 100000 runtime: 0.101255
-        Points: 1000000 runtime: 1.49279
+        Points: 10 runtime: 5e-06
+        Points: 1000 runtime: 0.000193
+        Points: 10000 runtime: 0.001555
+        Points: 100000 runtime: 0.014948
+        Points: 1000000 runtime: 0.164004
     Type: rectangle
-        Points: 10 runtime: 9e-06
-        Points: 1000 runtime: 0.000126
-        Points: 10000 runtime: 0.00116
-        Points: 100000 runtime: 0.006303
-        Points: 1000000 runtime: 0.06065
+        Points: 10 runtime: 4e-06
+        Points: 1000 runtime: 9.4e-05
+        Points: 10000 runtime: 0.000898
+        Points: 100000 runtime: 0.008868
+        Points: 1000000 runtime: 0.105205
     Type: triangle
-        Points: 10 runtime: 9e-06
-        Points: 1000 runtime: 0.0001
-        Points: 10000 runtime: 0.000513
-        Points: 100000 runtime: 0.002345
-        Points: 1000000 runtime: 0.027835
+        Points: 10 runtime: 5e-06
+        Points: 1000 runtime: 7.3e-05
+        Points: 10000 runtime: 0.000687
+        Points: 100000 runtime: 0.007204
+        Points: 1000000 runtime: 0.091441

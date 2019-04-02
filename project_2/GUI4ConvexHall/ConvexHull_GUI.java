@@ -292,9 +292,9 @@ public class ConvexHull_GUI extends JPanel
 //         String dataFile = "test.txt";
 //         String hullFile = "hull.txt";
 
-         String algType = "J";
+         String algType = "Q";
          String type = "triangle";
-         String points = "100000";
+         String points = "1000";
 
          String dataFile = "data/"+type+"_" +points+".txt";
          String hullFile = "data/sorted/_sorted_"+algType + "_"+type+"_" +points+".txt";
