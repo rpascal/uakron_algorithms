@@ -60,7 +60,6 @@ vector<Point> getInputData(string fileName)
         temp.x = std::stoi(s);
         iss >> s;
         temp.y = std::stoi(s);
-        // std::cout << temp.x << "  " << temp.y << std::endl;
         data.push_back(temp);
     });
 
@@ -69,10 +68,8 @@ vector<Point> getInputData(string fileName)
 
 int main(int argc, char *argv[])
 {
-    // std::cout << argc << argv[1];
     std::string str1("testRuntimes");
 
-    //Second project starts here
     if (argc == 2 && str1.compare(argv[1]) == 0)
     {
         testRuntimes();
@@ -93,13 +90,7 @@ int main(int argc, char *argv[])
             return 0;
         }
         HullSortResult res = runHullSort(algType, data);
-
-        std::cout << "Runtime: " << res.runtime << std::endl;
-
         writeSorted(res.outputFileName, res.sortedData);
-
-        // std::cout << res.outputFileName << std::endl;
-
         return 0;
     }
 }
@@ -112,6 +103,9 @@ double runtime(clock_t start, clock_t stop)
     return double(stop - start) / double(CLOCKS_PER_SEC);
 }
 
+/*
+    Function to run the convex hull with a parameter to specify what algorithm type to use
+*/
 HullSortResult runHullSort(string algType, vector<Point> data)
 {
     clock_t start, stop;
@@ -151,6 +145,11 @@ HullSortResult runHullSort(string algType, vector<Point> data)
     return res;
 }
 
+/*
+    Function used to test all the different cases in one go and
+    output the runtimes to a text file. To utilize this function all the 
+    input data files must be pre-generated to be pulled from.
+*/
 void testRuntimes()
 {
     string algTypes[3] = {"G", "J", "Q"};
@@ -186,6 +185,9 @@ void testRuntimes()
     outFile.close();
 }
 
+/*
+    Wrties the sorted data to a text file
+*/
 void writeSorted(string name, vector<Point> data)
 {
 

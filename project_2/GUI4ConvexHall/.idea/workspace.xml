@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59f65748-a8cb-41a2-b975-c4ba4f9ed504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ConvexHull_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ConvexHull_GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_10000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_100000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_circle_1000000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_10000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_100000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_onCircle_1000000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_10000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_100000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_rectangle_1000000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_10000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_100000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_100000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sorted/_sorted_Q_triangle_1000000.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../convexHull435" beforeDir="false" afterPath="$PROJECT_DIR$/../convexHull435" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../quick-hull.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../quick-hull.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../quick-hull.hh" beforeDir="false" afterPath="$PROJECT_DIR$/../quick-hull.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../runtimeResults.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../runtimeResults.txt" afterDir="false" />
-    </list>
+    <list default="true" id="59f65748-a8cb-41a2-b975-c4ba4f9ed504" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +14,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ConvexHull_GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="294" column="28" selection-start-line="294" selection-start-column="28" selection-end-line="294" selection-end-column="28" />
+            <state relative-caret-position="634">
+              <caret line="296" column="30" selection-start-line="296" selection-start-column="30" selection-end-line="296" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -69,8 +43,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-211" />
-    <option name="y" value="27" />
+    <option name="x" value="4096" />
     <option name="width" value="1865" />
     <option name="height" value="879" />
   </component>
@@ -154,7 +127,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3361000" />
+    <option name="totallyTimeSpent" value="3971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="45" y="25" width="1875" height="1175" extended-state="6" />
@@ -169,7 +142,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33843213" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33843213" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -215,8 +188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ConvexHull_GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="294" column="28" selection-start-line="294" selection-start-column="28" selection-end-line="294" selection-end-column="28" />
+        <state relative-caret-position="634">
+          <caret line="296" column="30" selection-start-line="296" selection-start-column="30" selection-end-line="296" selection-end-column="30" />
         </state>
       </provider>
     </entry>
