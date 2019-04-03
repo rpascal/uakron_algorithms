@@ -1,4 +1,9 @@
-// You need to complete this program for your second project.
+/*
+    Project 2 for Algorithms
+    Ryan Pascal
+    2932732
+    April 3rd, 2019
+*/
 
 // Standard libraries
 #include <string>
