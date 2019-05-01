@@ -1,8 +1,8 @@
 /*
-    Project 2 for Algorithms
+    Project 3 for Algorithms
     Ryan Pascal
     2932732
-    April 3rd, 2019
+    May 1st, 2019
 */
 
 // Standard libraries
@@ -19,29 +19,167 @@
 #include <list>
 #include <cstdlib>
 #include <algorithm>
+#include <bits/stdc++.h>
 
 using std::function;
 using std::getline;
 using std::ifstream;
+using std::pair;
 using std::string;
 using std::vector;
+string firstRelevantLineText, secondRelevantLineText;
 
-struct DataStruct
+vector<vector<int>> energyData(vector<vector<int>> matrix);
+vector<vector<int>> minEnergyM(vector<vector<int>> matrix);
+void resizeMatrix(vector<vector<int>> &matix, int width, int height);
+void printMatrix(vector<vector<int>> &matrix);
+void transpose(vector<vector<int>> &matrix);
+pair<int, int> getMinCoordFromAbove(vector<vector<int>> &cumulative, int h, int w);
+void getPath(vector<pair<int, int>> &path, vector<vector<int>> &cumulativeMatrix);
+void removePath(vector<vector<int>> &matrix, vector<vector<int>> &cumulativeMatrix);
+void addPath(vector<vector<int>> &matrix, vector<vector<int>> &cumulativeMatrix);
+void alterSeams(vector<vector<int>> &matrix, int seamsToRemove, bool isAdd);
+void readData(string fileName, function<void(string &)> lineCallback);
+vector<vector<int>> getInputData(string fileName);
+void writeMatrixToFile(vector<vector<int>> matix, string fileName, int vertical, int horizontal);
+
+int main(int argc, char *argv[])
 {
-    vector<vector<int>> data;
-    int height;
-    int width;
-};
+    if (argc < 4)
+        std::cout << "wrong format! should be \"a.exe image.pgm 10 5\"";
+    else
+    {
+        std::string image = argv[1];
+        int vertical = std::stoi(argv[2]);
+        int horizontal = std::stoi(argv[3]);
+        bool isAdd = false;
+        if (argc > 4)
+        {
+            std::string isAddStr = argv[4];
+            isAdd = (isAddStr == "a");
+        }
 
-DataStruct energyData(DataStruct data);
-DataStruct minEnergyM(DataStruct e);
+        vector<vector<int>> matrix = getInputData(image);
 
-void resizeVector(vector<vector<int>> &m, int width, int height)
+        alterSeams(matrix, vertical, isAdd);
+        transpose(matrix);
+        alterSeams(matrix, horizontal, isAdd);
+        transpose(matrix);
+
+        std::string outputFilename = image.substr(0, image.size() - 4) + "_processed.pgm";
+
+        writeMatrixToFile(matrix, outputFilename, vertical, horizontal);
+
+        return 0;
+    }
+}
+
+void writeMatrixToFile(vector<vector<int>> matrix, string fileName, int vertical, int horizontal)
 {
-    m.resize(height);
+
+    std::ofstream outfile;
+    outfile.open(fileName.c_str(), std::ofstream::out | std::ofstream::trunc);
+
+    // Generate First 4 lines of information
+    outfile << firstRelevantLineText << "\n";
+    outfile << "# Generated output " << fileName << ": Removed " << vertical << " vertical and " << horizontal << " horizontal seams" << std::endl;
+    outfile << matrix[0].size() << " " << matrix.size() << "\n";
+    outfile << secondRelevantLineText << "\n";
+
+    // print the matrix to file
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix[0].size(); j++)
+        {
+            outfile << matrix[i][j] << " ";
+        }
+        outfile << "\n";
+    }
+    outfile.close();
+}
+
+vector<vector<int>> energyData(vector<vector<int>> matrix)
+{
+    vector<vector<int>> newMatrix;
+    int height = matrix.size();
+    int width = matrix[0].size();
+    resizeMatrix(newMatrix, width, height);
+
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            int left = 0, right = 0, top = 0, bottom = 0;
+            int curValue = matrix[h][w];
+            // e(i,j) = |v(i,j)-v(i-1,j)|+ |v(i,j)-v(i+1,j)|+ |v(i,j)-v(i,j-1)|+ |v(i,j)-v(i,j+1)|,
+
+            if (h - 1 >= 0) // Top
+            {
+                top = abs(curValue - matrix[h - 1][w]);
+            }
+            if (h + 1 < height) // Bottom
+            {
+                bottom = abs(curValue - matrix[h + 1][w]);
+            }
+
+            if (w - 1 >= 0) // Left
+            {
+                left = abs(curValue - matrix[h][w - 1]);
+            }
+            if (w + 1 < width) // Right
+            {
+                right = abs(curValue - matrix[h][w + 1]);
+            }
+
+            newMatrix[h][w] = left + right + top + bottom;
+        }
+    }
+    return newMatrix;
+}
+
+vector<vector<int>> minEnergyM(vector<vector<int>> matrix)
+{
+
+    vector<vector<int>> newMatrix;
+    int height = matrix.size();
+    int width = matrix[0].size();
+    resizeMatrix(newMatrix, width, height);
+
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            int curValue = matrix[h][w];
+            // M(i,j) = e(i,j) + min( M(i-1,j-1), M(i-1,j), M(i-1,j+1) )
+
+            if (h - 1 >= 0) // Top
+            {
+                int left = INT_MAX, right = INT_MAX, middle = newMatrix[h - 1][w];
+
+                if (w - 1 >= 0) // Left
+                {
+                    left = newMatrix[h - 1][w - 1];
+                }
+                if (w + 1 < width) // Right
+                {
+                    right = newMatrix[h - 1][w + 1];
+                }
+
+                curValue += std::min({left, right, middle});
+            }
+
+            newMatrix[h][w] = curValue;
+        }
+    }
+    return newMatrix;
+}
+
+void resizeMatrix(vector<vector<int>> &matix, int width, int height)
+{
+    matix.resize(height);
     for (int i = 0; i < height; i++)
     {
-        m[i].resize(width);
+        matix[i].resize(width);
     }
 }
 
@@ -60,76 +198,148 @@ void printMatrix(vector<vector<int>> &matrix)
     std::cout << std::endl;
 }
 
-void transpose(DataStruct &data)
+void transpose(vector<vector<int>> &matrix)
 {
+    int width = matrix[0].size();
+    int height = matrix.size();
     vector<vector<int>> transposedMatrix;
-    resizeVector(transposedMatrix, data.width, data.height);
-    for (int i = 0; i < data.height; i++)
-        for (int j = 0; j < data.width; j++)
-            transposedMatrix[j][i] = data.data[i][j];\
+    resizeMatrix(transposedMatrix, height, width);
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            transposedMatrix[j][i] = matrix[i][j];
+        }
+    }
 
-    data.data = transposedMatrix;
+    matrix = transposedMatrix;
 }
 
-// Returns the coordinates in the cumulative energy matrix of the minimum value in one row
-std::pair<int, int> minCoords(std::vector<std::vector<int> > &cumulative, int i) {
-    std::pair<int, int> min;
-    min.first = i;
-    min.second = 0;
-    for (int j = 1; j < cumulative[i].size(); j++)
-        if (cumulative[i][j] < cumulative[i][min.second])
-            min.second = j;
-
-    return min;
-}
-
-// Returns the coordinates in the cumulative energy matrix of the least of the 3 entries above the number at i, j
-std::pair<int, int> minCoodsFromAbove(std::vector<std::vector<int> > &cumulative, int i, int j) {
+pair<int, int> getMinCoordFromAbove(vector<vector<int>> &cumulative, int i, int j)
+{
     std::pair<int, int> min;
     min.first = i - 1;
-    // There will always be an element above this one, so default min j to it just in case
     min.second = j;
     if (j != 0)
+    {
+        //Left
         min.second = j - 1;
-    if (cumulative[i-1][j] < cumulative[min.first][min.second])
+    }
+    if (cumulative[min.first][j] < cumulative[min.first][min.second])
+    {
+        //Middle
         min.second = j;
-    if (j != cumulative[i].size() - 1)
-        if (cumulative[i-1][j+1] < cumulative[min.first][min.second])
-            min.second = j + 1;
+    }
+    if (j != cumulative[i].size() - 1 && cumulative[min.first][j + 1] < cumulative[min.first][min.second])
+    {
+        //Right
+        min.second = j + 1;
+    }
 
     return min;
 }
 
-// Trace up from bottom and find the path of the lowest numbers
-std::vector<std::pair<int, int> > findMinPath(std::vector<std::vector<int> > &cumulativeMatrix) {
+void getPath(vector<pair<int, int>> &path, vector<vector<int>> &cumulativeMatrix)
+{
     int height = cumulativeMatrix.size();
-    std::vector<std::pair<int, int> > path;
-    path.push_back(minCoords(cumulativeMatrix, height - 1));
+
+    // Find the indexes of the bottom row
+    pair<int, int> minInLastRow;
+    minInLastRow.first = height - 1;
+    minInLastRow.second = 0;
+    for (int j = 1; j < cumulativeMatrix[0].size(); j++)
+    {
+        if (cumulativeMatrix[0][j] < cumulativeMatrix[0][minInLastRow.second])
+        {
+            minInLastRow.second = j;
+        }
+    }
+
+    // Find the path from bottom up to remove
+    path.push_back(minInLastRow);
     for (int i = height - 1; i > 0; i--)
-        path.push_back(minCoodsFromAbove(cumulativeMatrix, path.back().first, path.back().second));
-
-    return path;
+    {
+        path.push_back(getMinCoordFromAbove(cumulativeMatrix, path.back().first, path.back().second));
+    }
 }
 
-// Removes the elements specified in the minPath
-void removeMinPath(std::vector<std::vector<int> > &matrix, std::vector<std::pair<int, int> > &minPath) {
+void removePath(vector<vector<int>> &matrix, vector<vector<int>> &cumulativeMatrix)
+{
+    vector<pair<int, int>> minPath;
+
+    getPath(minPath, cumulativeMatrix);
+
+    // Remove the path
     for (int i = 0; i < minPath.size(); i++)
-        matrix[minPath[i].first].erase(matrix[minPath[i].first].begin() + minPath[i].second);
+    {
+        int x = minPath[i].first;
+        int y = minPath[i].second;
+        matrix[x].erase(matrix[x].begin() + y);
+    }
 }
 
+void addPath(vector<vector<int>> &matrix, vector<vector<int>> &cumulativeMatrix)
+{
 
+    int height = matrix.size();
+    int width = matrix[0].size();
 
-// Main function to consolidate seam-removal functions
-void removeSeams(DataStruct &data, int seams) {
-    DataStruct energyMatrix, cumulativeMatrix;
-    vector<std::pair<int, int> > minPath;
+    vector<pair<int, int>> minPath;
 
-    // remove "seams" amount of seams 
-    for (int count = 0; count < seams; count++) {
-        energyMatrix = energyData(data);
+    getPath(minPath, cumulativeMatrix);
+
+    // Remove the path
+    for (int i = 0; i < minPath.size(); i++)
+    {
+        int h = minPath[i].first;
+        int w = minPath[i].second;
+
+        int count = 0;
+        int left = 0, right = 0, top = 0, bottom = 0;
+
+        if (h - 1 >= 0) // Top
+        {
+            top = matrix[h - 1][w];
+            count++;
+        }
+        if (h + 1 < height) // Bottom
+        {
+            bottom = matrix[h + 1][w];
+            count++;
+        }
+
+        if (w - 1 >= 0) // Left
+        {
+            left = matrix[h][w - 1];
+            count++;
+        }
+        if (w + 1 < width) // Right
+        {
+            right = matrix[h][w + 1];
+            count++;
+        }
+
+        int average = (top + bottom + left + right) / count;
+        matrix[h].insert(matrix[h].begin() + w, average);
+    }
+}
+
+void alterSeams(vector<vector<int>> &matrix, int seamsToRemove, bool isAdd)
+{
+    vector<vector<int>> energyMatrix, cumulativeMatrix;
+
+    for (int count = 0; count < seamsToRemove; count++)
+    {
+        energyMatrix = energyData(matrix);
         cumulativeMatrix = minEnergyM(energyMatrix);
-        minPath = findMinPath(cumulativeMatrix.data);
-        removeMinPath(data.data, minPath);
+        if (!isAdd)
+        {
+            removePath(matrix, cumulativeMatrix);
+        }
+        else
+        {
+            addPath(matrix, cumulativeMatrix);
+        }
     }
 }
 
@@ -146,24 +356,24 @@ void readData(string fileName, function<void(string &)> lineCallback)
     }
 }
 
-DataStruct getInputData(string fileName)
+vector<vector<int>> getInputData(string fileName)
 {
     int height;
     int width;
     int lineNumber = 1;
 
-    std::cout << "Line NUmber: " << lineNumber << "  fileName: " << fileName << std::endl;
-
     std::list<int> dataPoints;
 
     readData(fileName, [&](string &line) {
+        if (line[0] == '#')
+        {
+            return;
+        }
         if (lineNumber == 1)
         {
+            firstRelevantLineText = line;
         }
         else if (lineNumber == 2)
-        {
-        }
-        else if (lineNumber == 3)
         {
             std::istringstream iss(line);
             std::string s;
@@ -171,10 +381,10 @@ DataStruct getInputData(string fileName)
             width = std::stoi(s);
             iss >> s;
             height = std::stoi(s);
-            std::cout << "Width:" << width << "  Height:" << height << std::endl;
         }
-        else if (lineNumber == 4)
+        else if (lineNumber == 3)
         {
+            secondRelevantLineText = line;
         }
         else
         {
@@ -189,140 +399,18 @@ DataStruct getInputData(string fileName)
         lineNumber++;
     });
 
-    std::cout << "Data Points: " << dataPoints.size() << std::endl;
+    vector<vector<int>> matrix;
 
-    vector<vector<int>> data;
-
-    resizeVector(data, width, height);
+    resizeMatrix(matrix, width, height);
 
     for (int h = 0; h < height; h++)
     {
         for (int w = 0; w < width; w++)
         {
-            data[h][w] = dataPoints.front();
+            matrix[h][w] = dataPoints.front();
             dataPoints.pop_front();
         }
     }
 
-    DataStruct ret;
-    ret.data = data;
-    ret.height = height;
-    ret.width = width;
-
-    return ret;
-}
-
-int main(int argc, char *argv[])
-{
-    if (argc < 4)
-        std::cout << "wrong format! should be \"a.exe image.pgm 10 5\"";
-    else
-    {
-        std::string image = argv[1];
-        int vertical = std::stoi(argv[2]);
-        int horizontal = std::stoi(argv[3]);
-
-        DataStruct data = getInputData(image);
-
-        printMatrix(data.data);
-
-        std::cout << "----------------------------------------------------" << std::endl;
-
-        DataStruct enData = energyData(data);
-
-        printMatrix(enData.data);
-
-        std::cout << "----------------------------------------------------" << std::endl;
-
-        DataStruct mData = minEnergyM(enData);
-
-        printMatrix(mData.data);
-
-        std::cout << "hello world " << image << "  " << vertical << "   " << horizontal << std::endl;
-        return 0;
-    }
-}
-
-DataStruct energyData(DataStruct oldData)
-{
-    vector<vector<int>> data;
-    resizeVector(data, oldData.width, oldData.height);
-
-    for (int h = 0; h < oldData.height; h++)
-    {
-        for (int w = 0; w < oldData.width; w++)
-        {
-            int left = 0, right = 0, top = 0, bottom = 0;
-            int curValue = oldData.data[h][w];
-            // e(i,j) = |v(i,j)-v(i-1,j)|+ |v(i,j)-v(i+1,j)|+ |v(i,j)-v(i,j-1)|+ |v(i,j)-v(i,j+1)|,
-
-            if (h - 1 >= 0) // Top
-            {
-                top = abs(curValue - oldData.data[h - 1][w]);
-            }
-            if (h + 1 < oldData.height) // Bottom
-            {
-                bottom = abs(curValue - oldData.data[h + 1][w]);
-            }
-
-            if (w - 1 >= 0) // Left
-            {
-                left = abs(curValue - oldData.data[h][w - 1]);
-            }
-            if (w + 1 < oldData.width) // Right
-            {
-                right = abs(curValue - oldData.data[h][w + 1]);
-            }
-
-            data[h][w] = left + right + top + bottom;
-        }
-    }
-
-    DataStruct ret;
-    ret.data = data;
-    ret.height = oldData.height;
-    ret.width = oldData.width;
-
-    return ret;
-}
-
-DataStruct minEnergyM(DataStruct e)
-{
-
-    vector<vector<int>> M;
-    resizeVector(M, e.width, e.height);
-
-    for (int h = 0; h < e.height; h++)
-    {
-        for (int w = 0; w < e.width; w++)
-        {
-            int curValue = e.data[h][w];
-            // M(i,j) = e(i,j) + min( M(i-1,j-1), M(i-1,j), M(i-1,j+1) )
-
-            if (h - 1 >= 0) // Top
-            {
-                int left = 9999999, right = 9999999, middle = M[h - 1][w];
-
-                if (w - 1 >= 0) // Left
-                {
-                    left = M[h - 1][w - 1];
-                }
-                if (w + 1 < e.width) // Right
-                {
-                    right = M[h - 1][w + 1];
-                }
-
-                curValue += std::min({left, right, middle});
-            }
-
-            M[h][w] = curValue;
-        }
-    }
-
-    DataStruct ret;
-    ret.data = M;
-    ret.height = e.height;
-    ret.width = e.width;
-
-    return ret;
+    return matrix;
 }
